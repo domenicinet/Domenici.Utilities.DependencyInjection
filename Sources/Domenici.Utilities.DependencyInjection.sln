@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{E190AEF9-4EA7-4D2C-AC85-A9C6BF054D51}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EE155544-12B8-4675-A9A8-F01D2F3E6462}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domenici.Utilities.DependencyInjection", "Domenici.Utilities.DependencyInjection\Domenici.Utilities.DependencyInjection.csproj", "{745C779B-F935-4504-ACE2-6A1BFE116721}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domenici.Utilities.DependencyInjection.Tests", "Domenici.Utilities.DependencyInjection.Tests\Domenici.Utilities.DependencyInjection.Tests.csproj", "{403243E9-1F58-4DF6-9D52-CA51D1185A8F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{745C779B-F935-4504-ACE2-6A1BFE116721}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{745C779B-F935-4504-ACE2-6A1BFE116721}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{745C779B-F935-4504-ACE2-6A1BFE116721}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{745C779B-F935-4504-ACE2-6A1BFE116721}.Release|Any CPU.Build.0 = Release|Any CPU
+		{403243E9-1F58-4DF6-9D52-CA51D1185A8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{403243E9-1F58-4DF6-9D52-CA51D1185A8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{403243E9-1F58-4DF6-9D52-CA51D1185A8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{403243E9-1F58-4DF6-9D52-CA51D1185A8F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{745C779B-F935-4504-ACE2-6A1BFE116721} = {E190AEF9-4EA7-4D2C-AC85-A9C6BF054D51}
+		{403243E9-1F58-4DF6-9D52-CA51D1185A8F} = {EE155544-12B8-4675-A9A8-F01D2F3E6462}
+	EndGlobalSection
+EndGlobal
