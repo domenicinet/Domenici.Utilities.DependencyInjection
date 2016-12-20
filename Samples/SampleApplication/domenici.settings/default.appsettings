@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<appSettings timeout="300">
+    <item key="AssemblySignatures">
+[
+      {
+      'key'       : 'Service1',
+      'signature' : 'Service1, Version=1.0.0.0',
+      'namespace' : 'Service1.Service'
+      },
+      {
+      'key'       : 'Service2',
+      'signature' : 'Service2, Version=1.0.0.0',
+      'namespace' : 'Service2.Service'
+      }
+]
+    </item>
+</appSettings>
