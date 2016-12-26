@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Domenici.Utilities.DependencyInjection.Plugins;
 using System.Diagnostics;
 using Domenici.Utilities.DependencyInjection.Plugins.Generics;
+using System.Text;
 
 namespace Domenici.Utilities.DependencyInjection.Tests
 {
@@ -56,6 +57,65 @@ namespace Domenici.Utilities.DependencyInjection.Tests
             }
 
             Assert.IsNotNull(factory);
+        }
+
+        [TestMethod]
+        public void TestInstantiateObject()
+        {
+            string signatures = @"[
+                                        {
+                                            'key' : 'StringBuilder',
+                                            'signature' : 'mscorlib',
+                                            'namespace' : 'System.Text.StringBuilder'
+                                        },
+                                        {
+                                            'key' : 'Random', 
+                                            'signature' : 'mscorlib',
+                                            'namespace' : 'System.Random'
+                                        }
+                                    ]";
+
+            StringBuilder sb = null;
+            Random rnd = null;
+
+            using (PluginFactory pf = new PluginFactory(signatures))
+            {
+                sb = (StringBuilder)pf.Create("StringBuilder");
+                rnd = (Random)pf.Create("Random");
+            }
+
+            Assert.IsNotNull(sb);
+            Assert.IsNotNull(rnd);
+
+            Assert.IsInstanceOfType(sb, typeof(StringBuilder));
+            Assert.IsInstanceOfType(rnd, typeof(Random));
+        }
+
+        [TestMethod]
+        public void TestGenericsInstantiateObject()
+        {
+            string signatures = @"[
+                                        {
+                                            'key' : 'StringBuilder',
+                                            'signature' : 'mscorlib',
+                                            'namespace' : 'System.Text.StringBuilder'
+                                        },
+                                        {
+                                            'key' : 'Random', 
+                                            'signature' : 'mscorlib',
+                                            'namespace' : 'System.Random'
+                                        }
+                                    ]";
+
+            StringBuilder sb = null;
+
+            using (PluginFactory<StringBuilder> pf = new PluginFactory<StringBuilder>(signatures))
+            {
+                sb = pf.Create("StringBuilder");
+            }
+
+            Assert.IsNotNull(sb);
+            Assert.IsInstanceOfType(sb, typeof(StringBuilder));
         }
     }
 }
