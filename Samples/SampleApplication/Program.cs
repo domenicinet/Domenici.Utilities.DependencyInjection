@@ -35,8 +35,22 @@ namespace SampleApplication
                 IService service2 = (IService)factory.Create("Service2");
                 Console.WriteLine($"Message from second service: { service2.GetMessage() }");
             }
+
+            // Use first service loaded from path
+            using (var factory = new PluginFactory(signatures))
+            {
+                IService service1 = (IService)factory.Create("Service1FromPath");
+                Console.WriteLine($"Message from first service loaded from path: { service1.GetMessage() }");
+            }
+
+            // Use second service loaded from path
+            using (var factory = new PluginFactory(signatures))
+            {
+                IService service2 = (IService)factory.Create("Service2FromPath");
+                Console.WriteLine($"Message from second service loaded from path: { service2.GetMessage() }");
+            }
             #endregion
-            
+
             #region Call services using the generics factory
             Console.WriteLine();
             Console.WriteLine("Call services using generics factory...");
@@ -53,6 +67,20 @@ namespace SampleApplication
             {
                 IService service2 = factory.Create("Service2");
                 Console.WriteLine($"Message from second service: { service2.GetMessage() }");
+            }
+
+            // Use first service loaded from path
+            using (var factory = new PluginFactory<IService>(signatures))
+            {
+                IService service1 = factory.Create("Service1FromPath");
+                Console.WriteLine($"Message from first service loaded from path: { service1.GetMessage() }");
+            }
+
+            // Use second service loaded from path
+            using (var factory = new PluginFactory<IService>(signatures))
+            {
+                IService service2 = factory.Create("Service2FromPath");
+                Console.WriteLine($"Message from second service loaded from path: { service2.GetMessage() }");
             }
             #endregion
 
@@ -72,6 +100,20 @@ namespace SampleApplication
             {
                 IService service2 = factory.CreateService("Service2");
                 Console.WriteLine($"Message from second service: { service2.GetMessage() }");
+            }
+
+            // Use first service loaded from path
+            using (var factory = new ServiceFactory<IService>(signatures))
+            {
+                IService service1 = factory.CreateService("Service1FromPath");
+                Console.WriteLine($"Message from first service loaded from path: { service1.GetMessage() }");
+            }
+
+            // Use second service loaded from path
+            using (var factory = new ServiceFactory<IService>(signatures))
+            {
+                IService service2 = factory.CreateService("Service2FromPath");
+                Console.WriteLine($"Message from second service loaded from path: { service2.GetMessage() }");
             }
             #endregion
 

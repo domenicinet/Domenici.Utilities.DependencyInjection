@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 
 namespace Domenici.Utilities.DependencyInjection.Plugins.Generics
@@ -26,9 +27,14 @@ namespace Domenici.Utilities.DependencyInjection.Plugins.Generics
     ///
     ///         },
     ///         {
-    ///             'key' : '3', 
-    ///             'signature' : 'AssemblyC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null',
+    ///             'key'       : '3', 
     ///             'namespace' : 'AssemplyC.SomeClass'
+    ///             'path'      : 'C:\\Libs\\AssemblyC.dll'
+    ///         },
+    ///         {
+    ///             'key'       : '3', 
+    ///             'namespace' : 'AssemplyD.SomeClass'
+    ///             'path'      : '..\\..\\..\\Libs\\AssemblyD.dll'
     ///         }
     ///     ] 
     /// </summary>
@@ -131,8 +137,7 @@ namespace Domenici.Utilities.DependencyInjection.Plugins.Generics
         #endregion
 
         /// <summary>
-        /// This method will instatiate an object from the assembly identified by 
-        /// the given key.
+        /// This method will instatiate an object from the assembly identified by the given key.
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
@@ -152,8 +157,20 @@ namespace Domenici.Utilities.DependencyInjection.Plugins.Generics
 
                 if (null != assemblyItem)
                 {
-                    Assembly assembly = Assembly.Load(assemblyItem.Signature);
-                    result = (T)assembly.CreateInstance(assemblyItem.Namespace);
+                    if (string.IsNullOrWhiteSpace(assemblyItem.Path))
+                    {
+                        #region Retrieve assembly from BIN or GAC
+                        Assembly assembly = Assembly.Load(assemblyItem.Signature);
+                        result = (T)assembly.CreateInstance(assemblyItem.Namespace);
+                        #endregion
+                    }
+                    else
+                    {
+                        #region Retrieve assembly from path in the signature file
+                        Assembly assembly = Assembly.LoadFrom(Path.GetFullPath(assemblyItem.Path));
+                        result = (T)assembly.CreateInstance(assemblyItem.Namespace);
+                        #endregion
+                    }
                 }
                 else
                 {
@@ -166,6 +183,6 @@ namespace Domenici.Utilities.DependencyInjection.Plugins.Generics
             }
 
             return result;
-        }
+        }        
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 
 namespace Domenici.Utilities.DependencyInjection.Plugins
@@ -82,7 +83,7 @@ namespace Domenici.Utilities.DependencyInjection.Plugins
             reflectionSignatures = new List<AssemblySignatureItem>();
             reflectionSignatures.AddRange(assemblySignatures);
         }
-        
+
         /// <summary>
         /// Initialize factory.
         /// </summary>
@@ -100,6 +101,16 @@ namespace Domenici.Utilities.DependencyInjection.Plugins
         ///             'signature' : 'AssemblyB, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null',
         ///             'namespace' : 'AssemplyB.SomeClass'
         ///
+        ///         },
+        ///         {
+        ///             'key'       : '3', 
+        ///             'namespace' : 'AssemplyC.SomeClass'
+        ///             'path'      : 'C:\\Libs\\AssemblyC.dll'
+        ///         },
+        ///         {
+        ///             'key'       : '3', 
+        ///             'namespace' : 'AssemplyD.SomeClass'
+        ///             'path'      : '..\\..\\..\\Libs\\AssemblyD.dll'
         ///         }
         ///     ]        
         /// </param>
@@ -152,8 +163,20 @@ namespace Domenici.Utilities.DependencyInjection.Plugins
 
                 if (null != assemblyItem)
                 {
-                    Assembly assembly = Assembly.Load(assemblyItem.Signature);
-                    result = assembly.CreateInstance(assemblyItem.Namespace);
+                    if (string.IsNullOrWhiteSpace(assemblyItem.Path))
+                    {
+                        #region Retrieve assembly from BIN or GAC
+                        Assembly assembly = Assembly.Load(assemblyItem.Signature);
+                        result = assembly.CreateInstance(assemblyItem.Namespace);
+                        #endregion
+                    }
+                    else
+                    {
+                        #region Retrieve assembly from path in the signature file
+                        Assembly assembly = Assembly.LoadFrom(Path.GetFullPath(assemblyItem.Path));
+                        result = assembly.CreateInstance(assemblyItem.Namespace);
+                        #endregion
+                    }
                 }
                 else
                 {

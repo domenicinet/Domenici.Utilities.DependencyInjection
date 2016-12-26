@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <appSettings timeout="300">
     <item key="AssemblySignatures">
-[
+      [
       {
       'key'       : 'Service1',
       'signature' : 'Service1, Version=1.0.0.0',
@@ -11,7 +11,17 @@
       'key'       : 'Service2',
       'signature' : 'Service2, Version=1.0.0.0',
       'namespace' : 'Service2.Service'
+      },
+      {
+      'key'       : 'Service1FromPath',
+      'namespace' : 'Service1.Service',
+      'path'      : 'C:\\domenici.utilities\\Domenici.Utilities.DependencyInjection\\Samples\\Service1\\bin\\service1.dll'
+      },
+      {
+      'key'       : 'Service2FromPath',
+      'namespace' : 'Service2.Service',
+      'path'      : '..\\..\\..\\Samples\\Service2\\bin\\service2.dll'
       }
-]
+      ]
     </item>
 </appSettings>
