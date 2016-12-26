@@ -5,13 +5,16 @@ namespace Domenici.Utilities.DependencyInjection.Plugins
 {
     public class AssemblySignatureItem
     {
-        [JsonProperty("key")]
+        [JsonProperty("key"), JsonRequired]
         public string Key { get; protected set; }
 
-        [JsonProperty("signature")]
+        [JsonProperty("signature"), JsonRequired]
         public string Signature { get; protected set; }
 
-        [JsonProperty("namespace")]
+        [JsonProperty("namespace"), JsonRequired]
         public string Namespace { get; protected set; }
+
+        [JsonProperty("path")]
+        public string Path { get; protected set; }
     }
 }
