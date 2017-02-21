@@ -73,7 +73,7 @@ namespace Domenici.Utilities.DependencyInjection.Plugins.Generics
         /// List of items where key identifies the signature to be used 
         /// with Reflection in order to instantiate the correct class implementation.
         /// </summary>
-        protected static List<AssemblySignatureItem> reflectionSignatures;
+        protected List<AssemblySignatureItem> reflectionSignatures;
 
         #region Constructors
         /// <summary>
